@@ -53,7 +53,3 @@ The application uses:
 - **OpenCV** for camera capture and image processing
 - **PySide6** for the graphical user interface
 - **MediaPipe** for real-time face detection
-
-## License
-
-MIT License
