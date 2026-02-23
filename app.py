@@ -25,7 +25,6 @@ class Camshot(QMainWindow):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        self.create_sidebar(main_layout)
         self.create_main_section(main_layout)
         self.setup_camera()
         self.setup_face_detection()
@@ -41,77 +40,6 @@ class Camshot(QMainWindow):
             running_mode=VisionRunningMode.IMAGE
         )
         self.detector = FaceDetector.create_from_options(options)
-
-    def create_sidebar(self, parent_layout):
-        sidebar = QWidget()
-        sidebar.setStyleSheet("""
-            QWidget {
-                background-color: #212121;
-                border-right: 1px;
-                border-color: #757575;
-                border-style: solid;
-                min-width: 250px;
-                max-width: 250px;
-            }
-            QLabel {
-                color: white;
-                padding: 10px;
-                font-size: 14px;
-            }
-        """)
-
-        sidebar_layout = QVBoxLayout(sidebar)
-        sidebar_layout.setContentsMargins(10, 10, 10, 10)
-        sidebar_layout.setSpacing(10)
-
-        sidebar_layout.addStretch()
-        btn_screenshot = QPushButton("Take Photo")
-        btn_screenshot.setStyleSheet("""
-            QPushButton {
-                background-color: #424242;
-                color: white;
-                border: none;
-                padding: 10px;
-                font-size: 14px;
-                border-radius: 8px;
-                font-weight: bold;
-                min-width: 200px;
-                max-width: 200px;
-            }
-            QPushButton:hover {
-                background-color: #636363;
-            }
-            QPushButton:pressed {
-                background-color: #636363;
-            }
-        """)
-        btn_screenshot.clicked.connect(self.take_screenshot)
-        sidebar_layout.addWidget(btn_screenshot)
-
-        btn_exit = QPushButton("Exit")
-        btn_exit.setStyleSheet("""
-            QPushButton {
-                background-color: #424242;
-                color: white;
-                border: none;
-                padding: 10px;
-                font-size: 14px;
-                border-radius: 8px;
-                font-weight: bold;
-                min-width: 200px;
-                max-width: 200px;
-            }
-            QPushButton:hover {
-                background-color: #636363;
-            }
-            QPushButton:pressed {
-                background-color: #636363;
-            }
-        """)
-        btn_exit.clicked.connect(self.close)
-        sidebar_layout.addWidget(btn_exit)
-
-        parent_layout.addWidget(sidebar)
 
     def create_main_section(self, parent_layout):
         main_section = QWidget()
@@ -184,26 +112,6 @@ class Camshot(QMainWindow):
         bytes_per_line = ch * w
         q_image = QImage(frame.data, w, h, bytes_per_line, QImage.Format_RGB888)
         self.camera_label.setPixmap(QPixmap.fromImage(q_image))
-        
-    def take_screenshot(self):
-        if hasattr(self, 'current_frame') and self.current_frame is not None:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filter_name = self.selected_filter if self.selected_filter else "none"
-            filename = f"screenshot_{filter_name}_{timestamp}.jpg"
-            filepath = os.path.join(os.getcwd(), filename)
-
-            frame_to_save = cv2.flip(self.current_frame, 1)
-            cv2.imwrite(filepath, frame_to_save)
-            self.setWindowTitle(f"📸 Photo Saved: {filename}")
-
-            QTimer.singleShot(2000, lambda: self.setWindowTitle("Camshot"))
-
-    def closeEvent(self, event):
-        if hasattr(self, 'timer'):
-            self.timer.stop()
-        if hasattr(self, 'camera'):
-            self.camera.release()
-        event.accept()
 
 def main():
     app = QApplication(sys.argv)

@@ -6,7 +6,6 @@ A simple camera application with real-time face detection built with Python.
 
 - 🎥 Real-time camera feed
 - 👤 Face detection using MediaPipe
-- 📷 Capture and save photos
 - 🖥️ Modern dark-themed UI
 
 ## Screenshots
@@ -39,13 +38,6 @@ Run the application:
 ```bash
 python app.py
 ```
-
-### Controls
-
-- **Take Photo** button: Capture and save a screenshot
-- **Exit** button: Close the application
-
-Photos are saved in the current directory with timestamp filenames.
 
 ## How It Works
 
