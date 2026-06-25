@@ -17,7 +17,7 @@ Real-time camera analysis using MediaPipe and OpenCV, built with PySide6.
 ```
 Camshot/
 ├── app.py         # PySide6 main window + sidebar
-├── core.py        # Camera pipeline + frame renderer
+├── renderer.py    # Camera pipeline + frame renderer
 ├── analyzer.py    # FaceAnalyzer · HandAnalyzer · EyeTracker · AttributesDNN
 ├── config.py      # Paths, thresholds, colors
 ├── snapshots/     # Saved snapshots (auto-created)

@@ -10,7 +10,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QImage, QPixmap, QFont, QPalette, QColor
 from config import SIDEBAR_WIDTH, SNAPSHOTS_DIR
-from core import CameraPipeline, Renderer
+from renderer import CameraPipeline, Renderer
 from analyzer import FaceAnalyzer, EyeTracker, AttributesDNN, HandAnalyzer
 
 class Sidebar(QWidget):

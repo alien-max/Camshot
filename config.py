@@ -2,6 +2,7 @@ from pathlib import Path
 
 BASE_DIR  = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / ".models"
+
 GENDER_PROTO    = MODEL_DIR / "gender_deploy.prototxt"
 GENDER_MODEL    = MODEL_DIR / "gender_net.caffemodel"
 AGE_PROTO       = MODEL_DIR / "age_deploy.prototxt"

@@ -1,4 +1,7 @@
-PySide6
-opencv-python
+streamlit
+streamlit-webrtc
+av
+opencv-python-headless
 mediapipe
 numpy
+watchdog
